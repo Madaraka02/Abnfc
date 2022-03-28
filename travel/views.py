@@ -1,5 +1,6 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import *
+from .forms import *
 
 def home(request):
     attractions = Attraction.objects.all().order_by('-id')
@@ -50,3 +51,21 @@ def search(request):
 
         return render(request, 'search.html', context)
             
+
+def admin(request):
+    if request.user.is_staff:
+        form = AttractionForm()
+
+        if request.method == "POST":
+            form = AttractionForm(request.POST, request.FILES)
+            files = request.FILES.getlist('more_attraction_images')
+            if form.is_valid():
+                attraction = form.save()
+                for f in files:
+                    attraction_image = AttractionImages(attraction=attraction, image=f)
+                    attraction_image.save()            
+                    return redirect('admin')    
+        context = {
+            'form': form,
+        }
+        return render(request, 'admin.html', context)            
