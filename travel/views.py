@@ -52,8 +52,11 @@ def search(request):
         return render(request, 'search.html', context)
             
 
+       
+
 def admin(request):
     if request.user.is_staff:
+
         form = AttractionForm()
 
         if request.method == "POST":
@@ -63,9 +66,10 @@ def admin(request):
                 attraction = form.save()
                 for f in files:
                     attraction_image = AttractionImages(attraction=attraction, image=f)
-                    attraction_image.save()            
-                    return redirect('admin')    
+                    attraction_image.save()
+
+                return redirect('admin')    
         context = {
             'form': form,
         }
-        return render(request, 'admin.html', context)            
+        return render(request, 'admin.html', context)   
