@@ -1,5 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from .models import *
 from .forms import *
 
@@ -76,3 +78,31 @@ def admin(request):
             'form': form,
         }
         return render(request, 'admin.html', context)   
+
+def like_blog(request, slug):
+    blog = get_object_or_404(Blog, slug=request.POST.get('blog_slug'))  
+    is_liked = False
+    if   blog.likes.filter(id= request.user.id).exists():
+        blog.likes.remove(request.user)
+        is_liked = False
+    else:
+        blog.likes.add(request.user)
+        is_liked = True
+    return HttpResponseRedirect(reverse('blog_details', args=[str(slug)]))
+
+
+def blog_details(request, slug):
+    
+    blog = get_object_or_404(Blog, slug=slug)
+    is_liked = False
+    if  blog.likes.filter(id= request.user.id).exists():
+        is_liked=True
+
+    
+    context = {
+        'blog':blog,
+        'total_likes':blog.total_likes(),
+        'is_liked':is_liked,
+    }
+    
+    return render(request, 'blogdetails.html', context)        
