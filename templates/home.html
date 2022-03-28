@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
     <title>Travel Kenya</title>
 </head>
 <body>
+
+    <form action="/search">
+        <input name="q" type="text" placeholder="Search eg elephant" aria-label="Search" class="input" placeholder="Search here">
+        <button type="submit" class="search-btn">Search</button>
+    </form>
     <h4>WELCOME TO THE BEST TRAVEL GUIDE</h4>
 
     {% for att in attractions %}
@@ -22,6 +28,6 @@
         <img src="{{park.image.url}}" alt="{{park.name}}">
 
     {% endfor %}
-    
+
 </body>
 </html>

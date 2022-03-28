@@ -11,8 +11,8 @@
     <p>Some images of the park</p>
     <h6>Things you will see here</h6>
     <ul>
-        {%%}
-            <li></li>
+        {% for att in atts%}
+            <li>{{att.name}}</li>
         {% endfor %}
     </ul>
     

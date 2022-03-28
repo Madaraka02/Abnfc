@@ -18,9 +18,11 @@ def attDetails(request, slug):
     return render(request, 'attdetails.html', context)
 
 def parkDetails(request, slug):
-    park = get_object_or_404(Park, slug=slug)    
+    park = get_object_or_404(Park, slug=slug)   
+    atts = Attraction.objects.filter(parks__name=park) 
     context = {
         'park':park,
+        'atts':atts,
     }
     return render(request, 'parkdetails.html', context)    
 
@@ -43,8 +45,8 @@ def search(request):
     q = request.GET['q']
     if q:
         context = {
-            'data' : Product.objects.filter(name__icontains=q).order_by('-id'),
+            'data' : Attraction.objects.filter(name__icontains=q).order_by('-id'),
         }
 
-        return render(request, 'shop/search.html', context)
+        return render(request, 'search.html', context)
             
