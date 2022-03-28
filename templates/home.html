@@ -25,7 +25,7 @@
     {% for park in parks %}
     <a href="{% url 'parkdetails' park.slug %}"><p>{{park.name}}</p></a>
         
-        <img src="{{park.image.url}}" alt="{{park.name}}">
+        <img src="{{park.image.url}}" alt="{{park.name}}" height="300" width="400">
 
     {% endfor %}
 
