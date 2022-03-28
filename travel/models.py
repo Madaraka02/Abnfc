@@ -46,10 +46,14 @@ class Blog(models.Model):
     image = models.FileField(upload_to='blogs')
     date_added = models.DateField(auto_now_add=True)
     slug = models.SlugField(unique=True)
+    likes = models.ManyToManyField(User, related_name="likes", blank=True)
+
 
     def __str__(self):
         return self.author.username
-
+        
+    def total_likes(self):
+        return self.likes.count() 
 
 class Feedback(models.Model):
     name =  models.CharField(max_length=300)
