@@ -14,6 +14,11 @@
         <li>{{park}}</li>
         {% endfor %}
     </ul>
+    <h6>more images</h6>
+    {% for pi in attraction.attractionimages_set.all %}
+					
+        <img alt="" src="{{pi.image.url}}">
+    {% endfor %}
     
 </body>
 </html>

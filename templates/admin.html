@@ -7,6 +7,15 @@
     <title>Admin</title>
 </head>
 <body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p}}
+        </div>
+        <div class="form-actions">
+            <button class="btn btn-lg btn-secondary" type="submit">Add Project</button>
+        </div>
+    </form>
     
 </body>
 </html>

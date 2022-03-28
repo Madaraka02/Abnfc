@@ -25,7 +25,7 @@ class Attraction(models.Model):
     
 class AttractionImages(models.Model):
     attraction = models.ForeignKey(Attraction, on_delete=models.CASCADE)
-    image = models.FileField(upload_to='attimages')
+    image = models.FileField(upload_to='attimagesm', blank=True, null=True)
 
     def __str__(self):
         return self.attraction.name
@@ -33,7 +33,7 @@ class AttractionImages(models.Model):
 
 class ParkImages(models.Model):
     park = models.ForeignKey(Park, on_delete=models.CASCADE) 
-    image = models.FileField(upload_to='parks')   
+    image = models.FileField(upload_to='parksm', blank=True, null=True)   
 
     def __str__(self):
         return self.park.name
