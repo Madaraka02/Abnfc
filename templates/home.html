@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Kenya</title>
+</head>
+<body>
+    <h4>WELCOME TO THE BEST TRAVEL GUIDE</h4>
+
+    {% for att in attractions %}
+    <a href="{% url 'attdetails' att.slug %}"><p>{{att.name}}</p></a>
+        
+        <img src="{{att.image.url}}" alt="{{att.name}}">
+
+    {% endfor %}
+    <h3>Parks</h3>
+    {% for park in parks %}
+    <a href="{% url 'parkdetails' park.slug %}"><p>{{park.name}}</p></a>
+        
+        <img src="{{park.image.url}}" alt="{{park.name}}">
+
+    {% endfor %}
+    
+</body>
+</html>
