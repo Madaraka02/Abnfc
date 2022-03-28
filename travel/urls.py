@@ -9,4 +9,5 @@ urlpatterns = [
     path('travel/admin/', admin, name='admin'),
     path('like/<slug:slug>/', like_blog, name="like_blog"),
     path('blogs/<slug:slug>/', blog_details, name="blog_details"),
+    path('blogs/', blogs, name="blogs"),
 ]

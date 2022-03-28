@@ -106,3 +106,10 @@ def blog_details(request, slug):
     }
     
     return render(request, 'blogdetails.html', context)        
+
+def blogs(request):
+    blogs = Blog.objects.all().order_by('-id')    
+    context = {
+        'blogs':blogs,
+    }
+    return render(request, 'blogs.html', context)
