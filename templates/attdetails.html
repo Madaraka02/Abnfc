@@ -15,10 +15,12 @@
         {% endfor %}
     </ul>
     <h6>more images</h6>
-    {% for pi in attraction.attractionimages_set.all %}
+    {% if images %}
+    {% for im in images %}
 					<h4>worked</h4>
-        <img alt="" src="{{pi.image.url}}">
+        <img alt="" src="{{im.image.url}}">
     {% endfor %}
+    {% endif %}
     
 </body>
 </html>

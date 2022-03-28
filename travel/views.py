@@ -13,8 +13,10 @@ def home(request):
 
 def attDetails(request, slug):
     att = get_object_or_404(Attraction, slug=slug)    
+    images = AttractionImages.objects.filter(attraction=att)
     context = {
         'att':att,
+        'images':images,
     }
     return render(request, 'attdetails.html', context)
 
