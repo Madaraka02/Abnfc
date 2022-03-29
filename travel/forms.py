@@ -12,7 +12,8 @@ class FeedbackForm(ModelForm):
 class BlogForm(ModelForm):
     class Meta:
         model = Blog
-        fields = '__all__'
+        fields = ['title', 'content', 'image', 'slug']
+
 
 class AttractionForm(ModelForm):
     more_attraction_images = forms.FileField(required=False, widget=forms.FileInput(attrs={

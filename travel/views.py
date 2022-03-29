@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 from django.urls import reverse
 from .models import *
 from .forms import *
@@ -113,3 +114,45 @@ def blogs(request):
         'blogs':blogs,
     }
     return render(request, 'blogs.html', context)
+
+
+def edit_blog(request, id):
+    blog = get_object_or_404(Blog, id = id)
+    
+
+    form = BlogForm(request.POST or None, instance=blog)
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Your blog was updated successfully")
+        return redirect('user_page')
+    context = {
+        'blog':blog,
+        'form':form,
+    }
+    return render(request, 'updateblog.html', context)    
+    
+def postblog(request):
+    if request.user.is_authenticated:
+        form = BlogForm() 
+        if request.method == "POST":
+            form = BlogForm(request.POST, request.FILES)
+           
+            
+            if form.is_valid():  
+                blog = form.save(commit=False)   
+                blog.author = request.user
+                blog.save()
+                messages.success(request, "Your blog was added")
+                return redirect('home')
+    
+        context = {
+            'form':form,
+        }
+        return render(request, 'postblogpage.html', context)
+
+@login_required
+def delete_blog(request, id):
+    blog = get_object_or_404(Blog, id = id)
+    blog.delete()
+    messages.success(request, "Your blog was deleted successfully")
+    return redirect('user_page')
