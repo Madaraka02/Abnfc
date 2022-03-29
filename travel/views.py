@@ -13,7 +13,7 @@ def home(request):
         'attractions':attractions,
         'parks':parks,
     }
-    return render(request, 'home.html', context)
+    return render(request, 'ind.html', context)
 
 def attDetails(request, slug):
     att = get_object_or_404(Attraction, slug=slug)    
