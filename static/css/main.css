@@ -24,7 +24,7 @@
   
   /* When you mouse over the navigation links, change their color */
   .sidebar a:hover {
-    color: #f1f10d;
+    color: rgb(6, 138, 76);
   }
   
   /* Position and style the close button (top right corner) */
@@ -40,8 +40,8 @@
   .openbtn {
     font-size: 10px;
     cursor: pointer;
-    background-color: rgb(230, 218, 218);
-    color: rgb(15, 15, 15);
+    background-color: rgb(6, 138, 76);
+    color: #ffffff;
     padding: 10px 15px;
     border: none;
   }
