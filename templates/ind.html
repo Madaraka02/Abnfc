@@ -16,7 +16,7 @@
                                     <div class="card-body text-center">
                                         <p><img class=" img-fluid" src="{{att.image.url}}" alt="{{att.name}}"></p>
                                         <h4 class="card-title">{{att.name}}</h4>
-                                        <p class="card-text">This is basic card with image on top, title, description and button.</p>
+                                        
                                        
                                     </div>
                                 </div>
@@ -25,7 +25,7 @@
                                 <div class="card shadow-lg">
                                     <div class="card-body text-center mt-4">
                                         <h4 class="card-title">{{att.name}}</h4>
-                                        <p class="card-text"></p>
+                                        <p class="card-text">{{att.description}}</p>
                                         <a href="{% url 'attdetails' att.slug %}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                                     </div>
                                 </div>
@@ -55,7 +55,7 @@
                                     <div class="card-body text-center">
                                         <img class=" img-fluid" src="{{park.image.url}}" alt="{{park.name}}">
                                         <h4 class="card-title">{{park.name}}</h4>
-                                        <p class="card-text">This is basic card with image on top, title, description and button.</p>
+                    
                                         
                                     </div>
                                 </div>
