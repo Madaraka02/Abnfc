@@ -28,7 +28,9 @@
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         {% if request.user.is_authenticated and not request.user.is_staff %}
-          <a class="nav-link waves-effect" href="#">Hi,{{request.user.username}}
+          <a class="text-uppercase text-sm ">Hi,{{request.user.username}}
+          </a>
+          <a class="nav-link waves-effect" href="{% url 'home' %}">Home
           </a>
             <a class="nav-link waves-effect" href="{% url 'blogs' %}">Blogs
             </a>
@@ -36,7 +38,9 @@
             </a>
             <a class="nav-link waves-effect" href="{% url 'account_logout' %}">Logout
             </a>
-      {% elif request.user.is_authenticated and request.user.is_staff %} 
+      {% elif request.user.is_authenticated and request.user.is_staff %}
+      <a class="nav-link waves-effect" href="{% url 'home' %}">Home
+      </a> 
           <a class="nav-link waves-effect" href="{% url 'admin' %}">Admin
           </a>
             <a class="nav-link waves-effect" href="{% url 'blogs' %}">Blogs
@@ -44,6 +48,8 @@
           <a class="nav-link waves-effect" href="{% url 'account_logout' %}">Logout
           </a>
       {% else %}
+      <a class="nav-link waves-effect" href="{% url 'home' %}">Home
+      </a>
         <a class="nav-link waves-effect" href="{% url 'blogs' %}">Blogs
         </a>
           <a class="nav-link waves-effect" href="{% url 'account_login' %}">Login
