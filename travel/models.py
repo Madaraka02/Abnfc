@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 
 
+
 class Park(models.Model):
     name = models.CharField(max_length=300, unique=True, blank=False)
     location = models.CharField(max_length=300, blank=False)
@@ -42,6 +43,7 @@ class ParkImages(models.Model):
 class Blog(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=500)
+    snippet =  models.CharField(max_length=300, blank=True, null=True)
     content = models.TextField()
     image = models.FileField(upload_to='blogs')
     date_added = models.DateField(auto_now_add=True)

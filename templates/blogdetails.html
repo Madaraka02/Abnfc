@@ -120,8 +120,11 @@
                                     </form>
                                     {% if user.is_authenticated %}
                                       {% if user.id == blog.author.id %}
-                                     <p>edit</p>
-                                     <p>delete</p>
+                                      <div class="d-flex flex-row">
+                                        <a class="text-white btn btn-primary btn-sm m-2">edit</a>
+                                        <a class="text-white btn btn-danger btn-sm m-2">delete</a>
+                                      </div>
+                                   
                                       {% endif %}
                                     {% endif %}
                                     {% endif %}
