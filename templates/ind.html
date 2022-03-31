@@ -2,9 +2,14 @@
 {% extends "base.html" %}   
 {% block title %} Home {% endblock title %} 
 {% block content %}
+
     <section id="team" class="pb-5">
         <div class="container">
-            <h5 class="section-title h1">ATTRACTIONS</h5>
+            <nav class="navbar navbar-expand-lg navbar-light mt-3 mb-5 shadow-lg">
+                <span class="navbar-brand ai">Attractions</span>
+                <a class="nav-item ml-auto" href="{% url 'atts' %}" style="color: rgb(6, 231, 138); font-size: smaller; margin-right: 2px;">
+                  see all <i class="fa fa-angle-double-right" style="font-size: 2x;"></i></a>
+              </nav>
             <div class="row">
                 <!-- Team member -->
                 {% for att in attractions %}
@@ -15,7 +20,7 @@
                                 <div class="card shadow-lg">
                                     <div class="card-body text-center">
                                         <p><img class=" img-fluid" src="{{att.image.url}}" alt="{{att.name}}"></p>
-                                        <h4 class="card-title">{{att.name}}</h4>
+                                        <h4 class="card-title ">{{att.name}}</h4>
                                         
                                        
                                     </div>
@@ -43,7 +48,11 @@
     <!-- Team -->
     <section id="team" class="pb-5">
         <div class="container">
-            <h5 class="section-title h1">PARKS</h5>
+            <nav class="navbar navbar-expand-lg navbar-light mt-3 mb-5 shadow-lg">
+                <span class="navbar-brand ai">Places</span>
+                <a class="nav-item ml-auto" href="{% url 'parks' %}" style="color: rgb(6, 231, 138); font-size: smaller; margin-right: 2px;">
+                  see all <i class="fa fa-angle-double-right" style="font-size: 2x;"></i></a>
+              </nav>
             <div class="row">
                 <!-- Team member -->
                 {% for park in parks %}
