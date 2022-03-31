@@ -12,7 +12,7 @@ class FeedbackForm(ModelForm):
 class BlogForm(ModelForm):
     class Meta:
         model = Blog
-        fields = ['title', 'content', 'image', 'slug']
+        fields = ['title', 'content', 'snippet', 'image', 'slug']
 
 
 class AttractionForm(ModelForm):

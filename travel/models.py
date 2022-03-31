@@ -45,7 +45,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=500)
     snippet =  models.CharField(max_length=300, blank=True, null=True)
     content = models.TextField()
-    image = models.FileField(upload_to='blogs')
+    image = models.FileField(upload_to='blogs', blank=True)
     date_added = models.DateField(auto_now_add=True)
     slug = models.SlugField(unique=True)
     likes = models.ManyToManyField(User, related_name="likes", blank=True)
