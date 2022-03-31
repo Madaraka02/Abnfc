@@ -5,7 +5,10 @@ urlpatterns = [
     path('', home, name="home"),
     path('attractions/<slug:slug>/', attDetails, name="attdetails"),
     path('parks/<slug:slug>/', parkDetails, name="parkdetails"),
+    path('parks/', parks, name="parks"),
+    path('attractions/', attractions, name="atts"),
     path('search/', search, name='search'),
+    path('searchp/', searchp, name='searchp'),
     path('travel/admin/', admin, name='admin'),
 
     path('like/<slug:slug>/', like_blog, name="like_blog"),

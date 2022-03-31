@@ -8,8 +8,8 @@ from .models import *
 from .forms import *
 
 def home(request):
-    attractions = Attraction.objects.all().order_by('-id')
-    parks = Park.objects.all().order_by('-id')
+    attractions = Attraction.objects.all().order_by('-id')[:6]
+    parks = Park.objects.all().order_by('-id')[:6]
     context = {
         'attractions':attractions,
         'parks':parks,
@@ -58,7 +58,14 @@ def search(request):
 
         return render(request, 'search.html', context)
             
+def searchp(request):
+    p = request.GET['p']
+    if p:
+        context = {
+            'data' : Park.objects.filter(name__icontains=p).order_by('-id'),
+        }
 
+        return render(request, 'searchp.html', context)
        
 @login_required
 def admin(request):
@@ -179,3 +186,31 @@ def userposts(request):
       
     }
     return render(request, 'users.html', context)   
+
+
+def parks(request):
+       
+    parkss = Park.objects.all().order_by('-id')
+    
+
+    paginator = Paginator(parkss, 1)
+
+    page_number = request.GET.get('page')
+    parks = paginator.get_page(page_number)
+    context = {
+        'parks':parks,
+    }
+    return render(request, 'parks.html', context)
+
+
+def attractions(request):
+    attractionss = Attraction.objects.all().order_by('-id') 
+
+    paginator = Paginator(attractionss, 1)
+
+    page_number = request.GET.get('page')
+    attractions = paginator.get_page(page_number)
+    context = {
+        'attractions':attractions,
+    }
+    return render(request, 'atts.html', context)        
