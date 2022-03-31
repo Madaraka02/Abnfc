@@ -212,3 +212,56 @@ section .section-title {
   content: none;
   display: none;
 }
+
+/* .libg {
+  /* Set rules to fill background */
+  /* min-height: 100%;
+  min-width: 1024px;
+	 */
+  /* Set up proportionate scaling */
+  /* width: 100%;
+  height: auto; */
+	
+  /* Set up positioning */
+  /* position: fixed;
+  top: 0;
+  left: 0;
+} */ 
+
+
+.lightbox-gallery p {
+  color: #fff
+}
+
+.lightbox-gallery h2 {
+  font-weight: bold;
+  margin-bottom: 40px;
+  padding-top: 40px;
+  color: #fff
+}
+
+@media (max-width:767px) {
+  .lightbox-gallery h2 {
+      margin-bottom: 25px;
+      padding-top: 25px;
+      font-size: 24px
+  }
+}
+
+.lightbox-gallery .intro {
+  font-size: 16px;
+  max-width: 500px;
+  margin: 0 auto 40px
+}
+
+.lightbox-gallery .intro p {
+  margin-bottom: 0
+}
+
+.lightbox-gallery .photos {
+  padding-bottom: 20px
+}
+
+.lightbox-gallery .item {
+  padding-bottom: 30px
+}

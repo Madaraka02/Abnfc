@@ -2,17 +2,68 @@
 {% load crispy_forms_tags %}
 {% block title %}Attraction Details{% endblock title %}
 {% block content %}
+<div class="container-fluid mt-2 mb-2 text-center">
     <h6>{{att.name}}</h6>
-    <p>found in :</p>
-    <ul>
-        {% for park in att.parks.all%}
-        <li>{{park}}</li>
-        {% endfor %}
+</div>
+<div class="container mt-2 mb-2">
+    <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">
+                    {{att.description}}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+</div>
+   
+    
+    <ul class="list-unstyled">
+      
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <p class="text-uppercase">found in :</p>
+                    <div class="card shadow-lg">
+                        
+                        <div class="card-body">
+                            {% for park in att.parks.all%}
+                            <li class="card-text">{{park.name}}</li>
+                        {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+        
+       
     </ul>
-    <h6>more images</h6>
     {% if images %}
-    {% for im in images %}
-        <img alt="image" src="{{im.image.url}}">
-    {% endfor %}
+    <h6 class="text-center text-uppercase">Gallery</h6>
+
+    <div class="lightbox-gallery">
+        <div class="container p-3">
+
+            <div class="row photos">
+                {% for im in images %}
+                <div class="col-sm-6 col-md-4 col-lg-3 item mt-2 shadow-lg">
+                    <!-- <a href="{{im.image.url}}" data-lightbox="photos"> -->
+                    <img class="img-fluid" src="{{im.image.url}}"></a>
+                </div>
+                    {% endfor %}
+                
+            </div>
+        </div>
+    </div>
+  
+
+  
     {% endif %}
     {% endblock content %}

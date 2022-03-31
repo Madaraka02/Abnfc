@@ -2,12 +2,63 @@
 {% load crispy_forms_tags %}
 {% block title %}Park Details{% endblock title %}
 {% block content %}
+<div class="container-fluid mt-2 mb-2 text-center">
     <h5>WELCOME to {{park.name}}</h5>
-    <p>Some images of the park</p>
-    <h6>Things you will see here</h6>
-    <ul>
-        {% for att in atts%}
-            <li>{{att.name}}</li>
-        {% endfor %}
-    </ul>
+</div>
+<div class="container mt-2 mb-2">
+    <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">
+                   Located in {{park.location}}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+</div>
+<ul class="list-unstyled">
+      
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <p class="text-uppercase">What you will see here :</p>
+                <div class="card shadow-lg">
+                    
+                    <div class="card-body">
+                        {% for att in atts%}
+                        <li class="card-text">{{att.name}}</li>
+                    {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+    
+   
+</ul>
+{% if images %}
+<h6 class="text-center text-uppercase">Gallery</h6>
+
+<div class="lightbox-gallery">
+    <div class="container p-3">
+
+        <div class="row photos">
+            {% for im in images %}
+            <div class="col-sm-6 col-md-4 col-lg-3 item mt-2 shadow-lg">
+                <!-- <a href="{{im.image.url}}" data-lightbox="photos"> -->
+                <img class="img-fluid" src="{{im.image.url}}"></a>
+            </div>
+                {% endfor %}
+            
+        </div>
+    </div>
+</div>
+{% endif %}
     {% endblock content %}

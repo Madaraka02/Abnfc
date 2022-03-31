@@ -28,9 +28,11 @@ def attDetails(request, slug):
 def parkDetails(request, slug):
     park = get_object_or_404(Park, slug=slug)   
     atts = Attraction.objects.filter(parks__name=park) 
+    images = ParkImages.objects.filter(park=park)
     context = {
         'park':park,
         'atts':atts,
+        'images':images
     }
     return render(request, 'parkdetails.html', context)    
 
