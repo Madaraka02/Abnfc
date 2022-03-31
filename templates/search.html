@@ -37,6 +37,10 @@
           </a>
             <a class="nav-link waves-effect" href="{% url 'blogs' %}">Blogs
             </a>
+            <a class="nav-link waves-effect" href="{% url 'parks' %}">Parks
+            </a>
+            <a class="nav-link waves-effect" href="{% url 'atts' %}">Attractions
+            </a>
             <a class="nav-link waves-effect" href="{% url 'postblog' %}">write Blogs
             </a>
             <a class="nav-link waves-effect" href="{% url 'account_logout' %}">Logout
@@ -48,12 +52,20 @@
           </a>
             <a class="nav-link waves-effect" href="{% url 'blogs' %}">Blogs
             </a>
+            <a class="nav-link waves-effect" href="{% url 'parks' %}">Parks
+            </a>
+            <a class="nav-link waves-effect" href="{% url 'atts' %}">Attractions
+            </a>
           <a class="nav-link waves-effect" href="{% url 'account_logout' %}">Logout
           </a>
       {% else %}
       <a class="nav-link waves-effect" href="{% url 'home' %}">Home
       </a>
         <a class="nav-link waves-effect" href="{% url 'blogs' %}">Blogs
+        </a>
+        <a class="nav-link waves-effect" href="{% url 'parks' %}">Parks
+        </a>
+        <a class="nav-link waves-effect" href="{% url 'atts' %}">Attractions
         </a>
           <a class="nav-link waves-effect" href="{% url 'account_login' %}">Login
           </a>

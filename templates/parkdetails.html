@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>park details</title>
-</head>
-<body>
+{% extends 'bbase.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Park Details{% endblock title %}
+{% block content %}
     <h5>WELCOME to {{park.name}}</h5>
     <p>Some images of the park</p>
     <h6>Things you will see here</h6>
@@ -15,6 +10,4 @@
             <li>{{att.name}}</li>
         {% endfor %}
     </ul>
-    
-</body>
-</html>
+    {% endblock content %}
