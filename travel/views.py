@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse
 from .models import *
 from .forms import *
@@ -109,7 +110,14 @@ def blog_details(request, slug):
     return render(request, 'blogdetails.html', context)        
 
 def blogs(request):
-    blogs = Blog.objects.all().order_by('-id')    
+    
+    blogss = Blog.objects.all().order_by('-id')
+    
+
+    paginator = Paginator(blogss, 6)
+
+    page_number = request.GET.get('page')
+    blogs = paginator.get_page(page_number)
     context = {
         'blogs':blogs,
     }
@@ -124,7 +132,7 @@ def edit_blog(request, id):
     if form.is_valid():
         form.save()
         messages.success(request, "Your blog was updated successfully")
-        return redirect('user_page')
+        return redirect('user')
     context = {
         'blog':blog,
         'form':form,
@@ -155,4 +163,19 @@ def delete_blog(request, id):
     blog = get_object_or_404(Blog, id = id)
     blog.delete()
     messages.success(request, "Your blog was deleted successfully")
-    return redirect('user_page')
+    return redirect('user')
+
+
+def userposts(request):
+    blogss = Blog.objects.filter(author=request.user.id).order_by('-id')
+    
+
+    paginator = Paginator(blogss, 3)
+
+    page_number = request.GET.get('page')
+    blogs = paginator.get_page(page_number)
+    context ={
+        'blogs':blogs,
+      
+    }
+    return render(request, 'users.html', context)   
