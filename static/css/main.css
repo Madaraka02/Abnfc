@@ -32,7 +32,7 @@
     position: absolute;
     top: 0;
     right: 25px;
-    font-size: 36px;
+    font-size: 36px !important;
     margin-left: 50px;
   }
   
@@ -233,7 +233,11 @@ section .section-title {
   text-transform: uppercase;
 }
 
-
+a{
+  letter-spacing: 3px !important;
+  font-size: medium !important;
+  text-transform: uppercase !important;
+}
 
 .lightbox-gallery p {
   color: #fff
