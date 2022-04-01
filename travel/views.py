@@ -69,6 +69,21 @@ def searchp(request):
 
         return render(request, 'travel/searchp.html', context)
        
+  
+@login_required
+def admin(request):
+    if request.user.is_staff:
+        atts_count = Attraction.objects.all().count()
+        place_count = Park.objects.all().count()
+
+        context = {
+            'atts_count':atts_count,
+            'place_count':place_count,
+        }
+        return render(request, 'adminn/admin.html', context)
+    return redirect('home') 
+
+
 @login_required
 def adminatt(request):
     if request.user.is_staff:
@@ -84,25 +99,12 @@ def adminatt(request):
                     attraction_image = AttractionImages(attraction=attraction, image=f)
                     attraction_image.save()
                 messages.success(request, "attraction was added successfully")
-                return redirect('admin')    
+                return redirect('admin_atts')    
         context = {
             'form': form,
         }
-        return render(request, 'adminn/att.html', context)   
+        return render(request, 'adminn/att.html', context) 
 
-
-@login_required
-def admin(request):
-    if request.user.is_staff:
-        atts_count = Attraction.objects.all().count()
-        place_count = Park.objects.all().count()
-
-        context = {
-            'atts_count':atts_count,
-            'place_count':place_count,
-        }
-        return render(request, 'adminn/admin.html', context)
-    return redirect('home') 
 
 @login_required
 def adminpark(request):
