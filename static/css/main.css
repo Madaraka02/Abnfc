@@ -233,11 +233,7 @@ section .section-title {
   text-transform: uppercase;
 }
 
-.naitem{
-  letter-spacing: 3px !important;
-  font-size: large !important;
-  text-transform: uppercase !important;
-}
+
 
 .lightbox-gallery p {
   color: #fff

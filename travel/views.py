@@ -135,6 +135,42 @@ def adminpark(request):
         return render(request, 'admin/park.html', context)  
 
 
+@login_required 
+def admin_atts(request):
+    if request.user.is_staff:
+        atts_list = Attraction.objects.all().order_by('-id')
+        page = request.GET.get('page', 1)
+        paginator = Paginator(atts_list, 15)
+        try:
+            atts = paginator.page(page)
+        except PageNotAnInteger:
+            atts = paginator.page(1)
+        except EmptyPage:
+            atts = paginator.page(paginator.num_pages)  
+
+        context = {
+            'atts':atts,
+        }  
+        return render(request, 'admin/atts.html', context)    
+
+@login_required 
+def admin_parks(request):
+    if request.user.is_staff:
+        parks_list = Park.objects.all().order_by('-id')
+        page = request.GET.get('page', 1)
+        paginator = Paginator(parks_list, 15)
+        try:
+            parks = paginator.page(page)
+        except PageNotAnInteger:
+            parks = paginator.page(1)
+        except EmptyPage:
+            parks = paginator.page(paginator.num_pages)  
+
+        context = {
+            'parks':parks,
+        }  
+        return render(request, 'admin/places.html', context)
+
 def edit_att(request, id):
     att = get_object_or_404(Attraction, id = id)
     

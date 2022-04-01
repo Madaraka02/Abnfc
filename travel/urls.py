@@ -23,6 +23,8 @@ urlpatterns = [
 
     # admin
     path('travel/admin/', admin, name='admin'),
+    path('travel/admin/attractions/', admin_atts, name="admin_atts"),
+    path('travel/admin/parks/', admin_parks, name="admin_parks"),
     path('travel/admin/att/add/', adminatt, name="adminatt"),
     path('travel/admin/park/add/', adminpark, name="adminpark"),
     path('travel/admin/att/edit/<int:id>/', edit_att, name="edit_att"),

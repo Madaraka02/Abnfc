@@ -1,0 +1,52 @@
+{% extends 'admin/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}All Attraction{% endblock title %}
+{% block content %}
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="table-responsive">
+                <h5 class="text-center mt-2 mb-2">All Attractions</h5>
+                <table class="table table-sm table-striped table-hover">
+                  <thead class=" thead-dark">
+                    <tr>
+                      <th scope="col">Name</th>  
+                      <th scope="col">Update</th>
+                      <th scope="col">Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for att in atts %}
+                      <tr>
+                          <td>{{att.name}}</td>
+                         
+                          <td><a class="btn btn-outline-info btn-sm" href="{% url 'edit_att' att.id %}">Update <i class="far fa-edit"> </i></a></td>
+                          <td><a class="btn btn-outline-danger btn-sm" href="">Delete <i class="fas fa-trash-alt"></i></a></td>
+                          
+                          </tr>
+                
+                    {% endfor %}
+                  </tbody>
+                  </table>  
+                </div>
+                    <div class="pagination align-items-center justify-content-center">
+                      <span class="step-links">
+                          {% if atts.has_previous %}                                     <!--If there is a previous page-->
+                              <a class="btn btn-info btn-sm" href="?page={{ atts.previous_page_number }}">&laquo;</a>  <!--Hyperlink to previous page on Click-->
+                          {% endif %}
+                  
+                          <span class="current">
+                               Page{{ atts.number }} of {{ atts.paginator.num_pages }}  <!--customers_list.number Is the current page number,customers_list.paginator.num_pages Is the total number of pages-->
+                          </span>
+                  
+                          {% if atts.has_next %}    <!--If there is a next page-->
+                              <a class="btn btn-info btn-sm" href="?page={{ atts.next_page_number }}">&raquo;</a>    <!--Hyperlink to next page when clicked-->
+                          {% endif %}
+                      </span>
+                  </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+{% endblock content %}
