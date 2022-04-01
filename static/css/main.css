@@ -233,11 +233,7 @@ section .section-title {
   text-transform: uppercase;
 }
 
-a{
-  letter-spacing: 3px !important;
-  font-size: medium !important;
-  text-transform: uppercase !important;
-}
+
 
 .lightbox-gallery p {
   color: #fff
