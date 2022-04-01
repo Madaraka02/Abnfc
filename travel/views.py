@@ -83,7 +83,7 @@ def adminatt(request):
                 for f in files:
                     attraction_image = AttractionImages(attraction=attraction, image=f)
                     attraction_image.save()
-
+                messages.success(request, "attraction was added successfully")
                 return redirect('admin')    
         context = {
             'form': form,
@@ -118,7 +118,7 @@ def adminpark(request):
                 for f in files:
                     park_image = ParkImages(park=park, image=f)
                     park_image.save()
-
+                messages.success(request, "Park was added successfully")
                 return redirect('admin_parks')    
         context = {
             'form': form,
