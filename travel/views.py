@@ -70,7 +70,7 @@ def searchp(request):
         return render(request, 'searchp.html', context)
        
 @login_required
-def admin(request):
+def adminatt(request):
     if request.user.is_staff:
 
         form = AttractionForm()
@@ -88,7 +88,84 @@ def admin(request):
         context = {
             'form': form,
         }
-        return render(request, 'admin.html', context)   
+        return render(request, 'admin/att.html', context)   
+
+
+@login_required
+def admin(request):
+    if request.user.is_staff:
+
+        form = ParkForm()
+
+        if request.method == "POST":
+            form = ParkForm(request.POST, request.FILES)
+            files = request.FILES.getlist('more_park_images')
+            if form.is_valid():
+                park = form.save()
+                for f in files:
+                    park_image = ParkImages(park=park, image=f)
+                    park_image.save()
+
+                return redirect('admin')    
+        context = {
+            'form': form,
+        }
+        return render(request, 'admin/admin.html', context)
+
+
+@login_required
+def adminpark(request):
+    if request.user.is_staff:
+
+        form = ParkForm()
+
+        if request.method == "POST":
+            form = ParkForm(request.POST, request.FILES)
+            files = request.FILES.getlist('more_park_images')
+            if form.is_valid():
+                park = form.save()
+                for f in files:
+                    park_image = ParkImages(park=park, image=f)
+                    park_image.save()
+
+                return redirect('admin')    
+        context = {
+            'form': form,
+        }
+        return render(request, 'admin/park.html', context)  
+
+
+def edit_att(request, id):
+    att = get_object_or_404(Attraction, id = id)
+    
+
+    form = AttractionForm(request.POST or None, instance=att)
+    if form.is_valid():
+        form.save()
+        messages.success(request, "attraction was updated successfully")
+        return redirect('admin')
+    context = {
+        'att':att,
+        'form':form,
+    }
+    return render(request, 'admin/updateatt.html', context)  
+
+
+def edit_park(request, id):
+    park = get_object_or_404(Park, id = id)
+    
+
+    form = ParkForm(request.POST or None, instance=park)
+    if form.is_valid():
+        form.save()
+        messages.success(request, "place was updated successfully")
+        return redirect('admin')
+    context = {
+        'park':park,
+        'form':form,
+    }
+    return render(request, 'admin/updatepark.html', context)  
+
 
 def like_blog(request, slug):
     blog = get_object_or_404(Blog, slug=request.POST.get('blog_slug'))  

@@ -9,7 +9,7 @@ urlpatterns = [
     path('attractions/', attractions, name="atts"),
     path('search/', search, name='search'),
     path('searchp/', searchp, name='searchp'),
-    path('travel/admin/', admin, name='admin'),
+    
 
     path('like/<slug:slug>/', like_blog, name="like_blog"),
     path('blogs/<slug:slug>/', blog_details, name="blog_details"),
@@ -20,4 +20,11 @@ urlpatterns = [
     path('addblog/', postblog, name="postblog"),
 
     path('user/', userposts, name="user"),
+
+    # admin
+    path('travel/admin/', admin, name='admin'),
+    path('travel/admin/att/add/', adminatt, name="adminatt"),
+    path('travel/admin/park/add/', adminpark, name="adminpark"),
+    path('travel/admin/att/edit/<int:id>/', edit_att, name="edit_att"),
+    path('travel/admin/park/edit/<int:id>/', edit_park, name="edit_park"),
 ]
