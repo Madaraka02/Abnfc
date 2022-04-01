@@ -14,7 +14,7 @@ def home(request):
         'attractions':attractions,
         'parks':parks,
     }
-    return render(request, 'ind.html', context)
+    return render(request, 'travel/ind.html', context)
 
 def attDetails(request, slug):
     att = get_object_or_404(Attraction, slug=slug)    
@@ -23,7 +23,7 @@ def attDetails(request, slug):
         'att':att,
         'images':images,
     }
-    return render(request, 'attdetails.html', context)
+    return render(request, 'travel/attdetails.html', context)
 
 def parkDetails(request, slug):
     park = get_object_or_404(Park, slug=slug)   
@@ -34,7 +34,7 @@ def parkDetails(request, slug):
         'atts':atts,
         'images':images
     }
-    return render(request, 'parkdetails.html', context)    
+    return render(request, 'travel/parkdetails.html', context)    
 
 
 
@@ -58,7 +58,7 @@ def search(request):
             'data' : Attraction.objects.filter(name__icontains=q).order_by('-id'),
         }
 
-        return render(request, 'search.html', context)
+        return render(request, 'travel/search.html', context)
             
 def searchp(request):
     p = request.GET['p']
@@ -67,7 +67,7 @@ def searchp(request):
             'data' : Park.objects.filter(name__icontains=p).order_by('-id'),
         }
 
-        return render(request, 'searchp.html', context)
+        return render(request, 'travel/searchp.html', context)
        
 @login_required
 def adminatt(request):
@@ -94,24 +94,15 @@ def adminatt(request):
 @login_required
 def admin(request):
     if request.user.is_staff:
+        atts_count = Attraction.objects.all().count()
+        place_count = Park.objects.all().count()
 
-        form = ParkForm()
-
-        if request.method == "POST":
-            form = ParkForm(request.POST, request.FILES)
-            files = request.FILES.getlist('more_park_images')
-            if form.is_valid():
-                park = form.save()
-                for f in files:
-                    park_image = ParkImages(park=park, image=f)
-                    park_image.save()
-
-                return redirect('admin_atts')    
         context = {
-            'form': form,
+            'atts_count':atts_count,
+            'place_count':place_count,
         }
         return render(request, 'admin/admin.html', context)
-
+    return redirect('home') 
 
 @login_required
 def adminpark(request):
@@ -243,7 +234,7 @@ def blog_details(request, slug):
         'is_liked':is_liked,
     }
     
-    return render(request, 'blogdetails.html', context)        
+    return render(request, 'travel/blogdetails.html', context)        
 
 def blogs(request):
     
@@ -257,7 +248,7 @@ def blogs(request):
     context = {
         'blogs':blogs,
     }
-    return render(request, 'blogs.html', context)
+    return render(request, 'travel/blogs.html', context)
 
 
 def edit_blog(request, id):
@@ -273,7 +264,7 @@ def edit_blog(request, id):
         'blog':blog,
         'form':form,
     }
-    return render(request, 'updateblog.html', context)    
+    return render(request, 'travel/updateblog.html', context)    
     
 def postblog(request):
     if request.user.is_authenticated:
@@ -292,7 +283,7 @@ def postblog(request):
         context = {
             'form':form,
         }
-        return render(request, 'postblogpage.html', context)
+        return render(request, 'travel/postblogpage.html', context)
 
 @login_required
 def delete_blog(request, id):
@@ -314,7 +305,7 @@ def userposts(request):
         'blogs':blogs,
       
     }
-    return render(request, 'users.html', context)   
+    return render(request, 'travel/users.html', context)   
 
 
 def parks(request):
@@ -329,7 +320,7 @@ def parks(request):
     context = {
         'parks':parks,
     }
-    return render(request, 'parks.html', context)
+    return render(request, 'travel/parks.html', context)
 
 
 def attractions(request):
@@ -342,4 +333,4 @@ def attractions(request):
     context = {
         'attractions':attractions,
     }
-    return render(request, 'atts.html', context)        
+    return render(request, 'travel/atts.html', context)        
