@@ -105,7 +105,6 @@ def adminatt(request):
         }
         return render(request, 'adminn/att.html', context) 
 
-
 @login_required
 def adminpark(request):
     if request.user.is_staff:
@@ -125,7 +124,7 @@ def adminpark(request):
         context = {
             'form': form,
         }
-        return render(request, 'adminn/park.html', context)  
+        return render(request, 'adminn/park.html', context)
 
 
 @login_required 
