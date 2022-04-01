@@ -1,21 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
-</head>
-<body>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="form-group">
-            {{ form.as_p}}
+{% extends 'admin/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Admin{% endblock title %}
+{% block content %}
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 mt-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-text text-center text-uppercase" style="font-size: medium; letter-spacing: 3px;">All Attractions</p>
+                                    <p class="card-text text-center text-uppercase" style="font-size: medium; letter-spacing: 3px; font-weight: bold;">
+                                        {{atts_count}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-text text-center text-uppercase" style="font-size: medium; letter-spacing: 3px;">All Places</p>
+                                    <p class="card-text text-center text-uppercase" style="font-size: medium; letter-spacing: 3px; font-weight: bold;">
+                                        {{place_count}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
         </div>
-        <div class="form-actions">
-            <button class="btn btn-lg btn-secondary" type="submit">Add Project</button>
-        </div>
-    </form>
-    
-</body>
-</html>
+    </div>
+    {% endblock content %}
