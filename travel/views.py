@@ -37,20 +37,6 @@ def parkDetails(request, slug):
     return render(request, 'travel/parkdetails.html', context)    
 
 
-
-# class catlistView(ListView):
-#     template_name = "shop/blank.html"
-#     context_object_name = 'catlist'
-
-
-#     def get_queryset(self):
-#         content = {
-#             'cat': self.kwargs['category'],
-#             'items': Product.objects.filter(category__name=self.kwargs['category'])
-#         }
-#         return content 
-
-
 def search(request):
     q = request.GET['q']
     if q:
@@ -119,7 +105,7 @@ def adminpark(request):
                 for f in files:
                     park_image = ParkImages(park=park, image=f)
                     park_image.save()
-                messages.success(request, "Park was added successfully")
+                messages.success(request, "Place was added successfully")
                 return redirect('admin_parks')    
         context = {
             'form': form,
