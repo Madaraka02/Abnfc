@@ -7,6 +7,8 @@ from django.urls import reverse
 from .models import *
 from .forms import *
 
+
+# fetching all places and attractions from the database and slicing to display only the latest six
 def home(request):
     attractions = Attraction.objects.all().order_by('-id')[:6]
     parks = Park.objects.all().order_by('-id')[:6]
@@ -16,6 +18,8 @@ def home(request):
     }
     return render(request, 'travel/ind.html', context)
 
+
+# details page for a single attraction fetched using the slug
 def attDetails(request, slug):
     att = get_object_or_404(Attraction, slug=slug)    
     images = AttractionImages.objects.filter(attraction=att)
@@ -25,6 +29,8 @@ def attDetails(request, slug):
     }
     return render(request, 'travel/attdetails.html', context)
 
+
+# details page for a single place fetched using the slug
 def parkDetails(request, slug):
     park = get_object_or_404(Park, slug=slug)   
     atts = Attraction.objects.filter(parks__name=park) 
@@ -37,6 +43,7 @@ def parkDetails(request, slug):
     return render(request, 'travel/parkdetails.html', context)    
 
 
+# search function for an attraction
 def search(request):
     q = request.GET['q']
     if q:
@@ -45,7 +52,9 @@ def search(request):
         }
 
         return render(request, 'travel/search.html', context)
-            
+
+
+# search query for a place
 def searchp(request):
     p = request.GET['p']
     if p:
@@ -55,7 +64,9 @@ def searchp(request):
 
         return render(request, 'travel/searchp.html', context)
        
-  
+
+# Main admin function  to display the count of all places and attractions in the database 
+# which uses the login required decorator and also checks to make sure the logged in user is an admin
 @login_required
 def admin(request):
     if request.user.is_staff:
@@ -70,6 +81,7 @@ def admin(request):
     return redirect('home') 
 
 
+# admin function for posting an attraction from the frontend
 @login_required
 def adminatt(request):
     if request.user.is_staff:
@@ -91,6 +103,7 @@ def adminatt(request):
         }
         return render(request, 'adminn/att.html', context) 
 
+# admin function for posting a place from the frontend
 @login_required
 def adminpark(request):
     if request.user.is_staff:
@@ -113,6 +126,7 @@ def adminpark(request):
         return render(request, 'adminn/park.html', context)
 
 
+# admin function for fetching and paginating all attractions from the database
 @login_required 
 def admin_atts(request):
     if request.user.is_staff:
@@ -131,6 +145,8 @@ def admin_atts(request):
         }  
         return render(request, 'adminn/atts.html', context)    
 
+
+# admin function for fetching and paginating all places from the database
 @login_required 
 def admin_parks(request):
     if request.user.is_staff:
@@ -149,52 +165,66 @@ def admin_parks(request):
         }  
         return render(request, 'adminn/places.html', context)
 
+
+# admin function for updating an attraction
+@login_required
 def edit_att(request, id):
-    att = get_object_or_404(Attraction, id = id)
-    
+    if request.user.is_staff:
+        att = get_object_or_404(Attraction, id = id)
+        
 
-    form = AttractionForm(request.POST or None, instance=att)
-    if form.is_valid():
-        form.save()
-        messages.success(request, "attraction was updated successfully")
-        return redirect('admin_atts')
-    context = {
-        'att':att,
-        'form':form,
-    }
-    return render(request, 'adminn/updateatt.html', context)  
+        form = AttractionForm(request.POST or None, instance=att)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "attraction was updated successfully")
+            return redirect('admin_atts')
+        context = {
+            'att':att,
+            'form':form,
+        }
+        return render(request, 'adminn/updateatt.html', context)  
 
 
+# admin function for updating a place
+@login_required
 def edit_park(request, id):
-    park = get_object_or_404(Park, id = id)
-    
+    if request.user.is_staff:
+        park = get_object_or_404(Park, id = id)
+        
 
-    form = ParkForm(request.POST or None, instance=park)
-    if form.is_valid():
-        form.save()
-        messages.success(request, "place was updated successfully")
-        return redirect('admin_parks')
-    context = {
-        'park':park,
-        'form':form,
-    }
-    return render(request, 'adminn/updatepark.html', context)  
+        form = ParkForm(request.POST or None, instance=park)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "place was updated successfully")
+            return redirect('admin_parks')
+        context = {
+            'park':park,
+            'form':form,
+        }
+        return render(request, 'adminn/updatepark.html', context)  
 
+
+# admin function for deleting an attraction from the database
 @login_required
 def delete_att(request, id):
-    att = get_object_or_404(Attraction, id = id)
-    att.delete()
-    messages.success(request, "Attraction was deleted successfully")
-    return redirect('admin_atts')
+    if request.user.is_staff:
+        att = get_object_or_404(Attraction, id = id)
+        att.delete()
+        messages.success(request, "Attraction was deleted successfully")
+        return redirect('admin_atts')
 
 
+# admin function for deleting a place from the database
 @login_required
 def delete_park(request, id):
-    park = get_object_or_404(Park, id = id)
-    park.delete()
-    messages.success(request, "Park was deleted successfully")
-    return redirect('admin_parks')
+    if request.user.is_staff:
+        park = get_object_or_404(Park, id = id)
+        park.delete()
+        messages.success(request, "Park was deleted successfully")
+        return redirect('admin_parks')
 
+
+# function to trigger the like blog method
 def like_blog(request, slug):
     blog = get_object_or_404(Blog, slug=request.POST.get('blog_slug'))  
     is_liked = False
@@ -206,7 +236,7 @@ def like_blog(request, slug):
         is_liked = True
     return HttpResponseRedirect(reverse('blog_details', args=[str(slug)]))
 
-
+# function for displaying blog details by fetching a specific blog using its slug
 def blog_details(request, slug):
     
     blog = get_object_or_404(Blog, slug=slug)
@@ -223,6 +253,8 @@ def blog_details(request, slug):
     
     return render(request, 'travel/blogdetails.html', context)        
 
+
+# function for fetching all blogs from the database
 def blogs(request):
     
     blogss = Blog.objects.all().order_by('-id')
@@ -238,6 +270,8 @@ def blogs(request):
     return render(request, 'travel/blogs.html', context)
 
 
+# function for fetching a specific blog to be updated using its id
+@login_required
 def edit_blog(request, id):
     blog = get_object_or_404(Blog, id = id)
     
@@ -252,7 +286,10 @@ def edit_blog(request, id):
         'form':form,
     }
     return render(request, 'travel/updateblog.html', context)    
-    
+
+
+# function for posting new blogs from the frontend
+@login_required
 def postblog(request):
     if request.user.is_authenticated:
         form = BlogForm() 
@@ -272,6 +309,8 @@ def postblog(request):
         }
         return render(request, 'travel/postblogpage.html', context)
 
+
+# function for fetching a specific blog using its id and deleting it
 @login_required
 def delete_blog(request, id):
     blog = get_object_or_404(Blog, id = id)
@@ -280,6 +319,8 @@ def delete_blog(request, id):
     return redirect('user')
 
 
+# function for fetching all the blogs of the current logged in use
+@login_required
 def userposts(request):
     blogss = Blog.objects.filter(author=request.user.id).order_by('-id')
     
@@ -295,6 +336,7 @@ def userposts(request):
     return render(request, 'travel/users.html', context)   
 
 
+# function to fetch all places in the database and ordering them by the latest id
 def parks(request):
        
     parkss = Park.objects.all().order_by('-id')
@@ -310,6 +352,7 @@ def parks(request):
     return render(request, 'travel/parks.html', context)
 
 
+# function for fetching all attractions and ordering them by the latest id
 def attractions(request):
     attractionss = Attraction.objects.all().order_by('-id') 
 
