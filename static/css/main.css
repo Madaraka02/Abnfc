@@ -233,10 +233,10 @@ section .section-title {
   text-transform: uppercase;
 }
 
-a{
-  letter-spacing: 3px;
-  font-size: xx-small;
-  text-transform: uppercase;
+.naitem{
+  letter-spacing: 3px !important;
+  font-size: large !important;
+  text-transform: uppercase !important;
 }
 
 .lightbox-gallery p {
