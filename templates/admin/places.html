@@ -23,7 +23,7 @@
                           <td>{{park.name}}</td>
                           <td>{{park.location}}</td>
                           <td><a class="btn btn-outline-info btn-sm" href="{% url 'edit_park' park.id %}">Update <i class="far fa-edit"> </i></a></td>
-                          <td><a class="btn btn-outline-danger btn-sm" href="">Delete <i class="fas fa-trash-alt"></i></a></td>
+                          <td><a class="btn btn-outline-danger btn-sm" href="{% url 'delete_park' park.id %}">Delete <i class="fas fa-trash-alt"></i></a></td>
                           
                           </tr>
                 
