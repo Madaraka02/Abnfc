@@ -88,7 +88,7 @@ def adminatt(request):
         context = {
             'form': form,
         }
-        return render(request, 'admin/att.html', context)   
+        return render(request, 'adminn/att.html', context)   
 
 
 @login_required
@@ -101,7 +101,7 @@ def admin(request):
             'atts_count':atts_count,
             'place_count':place_count,
         }
-        return render(request, 'admin/admin.html', context)
+        return render(request, 'adminn/admin.html', context)
     return redirect('home') 
 
 @login_required
@@ -123,7 +123,7 @@ def adminpark(request):
         context = {
             'form': form,
         }
-        return render(request, 'admin/park.html', context)  
+        return render(request, 'adminn/park.html', context)  
 
 
 @login_required 
@@ -142,7 +142,7 @@ def admin_atts(request):
         context = {
             'atts':atts,
         }  
-        return render(request, 'admin/atts.html', context)    
+        return render(request, 'adminn/atts.html', context)    
 
 @login_required 
 def admin_parks(request):
@@ -160,7 +160,7 @@ def admin_parks(request):
         context = {
             'parks':parks,
         }  
-        return render(request, 'admin/places.html', context)
+        return render(request, 'adminn/places.html', context)
 
 def edit_att(request, id):
     att = get_object_or_404(Attraction, id = id)
@@ -175,7 +175,7 @@ def edit_att(request, id):
         'att':att,
         'form':form,
     }
-    return render(request, 'admin/updateatt.html', context)  
+    return render(request, 'adminn/updateatt.html', context)  
 
 
 def edit_park(request, id):
@@ -191,7 +191,7 @@ def edit_park(request, id):
         'park':park,
         'form':form,
     }
-    return render(request, 'admin/updatepark.html', context)  
+    return render(request, 'adminn/updatepark.html', context)  
 
 @login_required
 def delete_att(request, id):

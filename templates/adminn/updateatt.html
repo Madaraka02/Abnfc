@@ -1,24 +1,25 @@
-{% extends 'admin/base.html' %}
+{% extends 'adminn/base.html' %}
 {% load crispy_forms_tags %}
-{% block title %}Add Park{% endblock title %}
+{% block title %}Update Blog{% endblock title %}
 {% block content %}
   <div class="container">
       <div class="row">
           <div class="col-md-2"></div>
           <div class="col-md-8 mt-2">
-            
+         
               <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
+                {{form.media}}
                 <div class="form-group">
                 {{form|crispy}}</div>
                 <div class="form-actions mt-2">
-                <button class="btn btn-primary" type="submit">Post</button>
+                <button class="btn btn-primary" type="submit">Save</button>
               </div>
             </form>
-         
-
+    
           </div>
           <div class="col-md-2"></div>
       </div>
   </div>
+
 {% endblock content %}
