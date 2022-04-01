@@ -106,7 +106,7 @@ def admin(request):
                     park_image = ParkImages(park=park, image=f)
                     park_image.save()
 
-                return redirect('admin')    
+                return redirect('admin_atts')    
         context = {
             'form': form,
         }
@@ -128,7 +128,7 @@ def adminpark(request):
                     park_image = ParkImages(park=park, image=f)
                     park_image.save()
 
-                return redirect('admin')    
+                return redirect('admin_parks')    
         context = {
             'form': form,
         }
@@ -179,7 +179,7 @@ def edit_att(request, id):
     if form.is_valid():
         form.save()
         messages.success(request, "attraction was updated successfully")
-        return redirect('admin')
+        return redirect('admin_atts')
     context = {
         'att':att,
         'form':form,
@@ -195,13 +195,27 @@ def edit_park(request, id):
     if form.is_valid():
         form.save()
         messages.success(request, "place was updated successfully")
-        return redirect('admin')
+        return redirect('admin_parks')
     context = {
         'park':park,
         'form':form,
     }
     return render(request, 'admin/updatepark.html', context)  
 
+@login_required
+def delete_att(request, id):
+    att = get_object_or_404(Attraction, id = id)
+    att.delete()
+    messages.success(request, "Attraction was deleted successfully")
+    return redirect('admin_atts')
+
+
+@login_required
+def delete_park(request, id):
+    park = get_object_or_404(Park, id = id)
+    park.delete()
+    messages.success(request, "Park was deleted successfully")
+    return redirect('admin_parks')
 
 def like_blog(request, slug):
     blog = get_object_or_404(Blog, slug=request.POST.get('blog_slug'))  
